@@ -39,6 +39,10 @@ config LINUX_BUILD_TARGET
 	string "Linux kernel defconfig name"
 	default "starfive_jh7100_fedora"
 
+config LINUX_INSTALL_SUDO
+	bool "Install Linux with sudo"
+	default n
+
 config LINUX_INSTALL_PATH
 	string "Linux kernel Image/vmlinuz... install path"
 	default "rootfs/boot"

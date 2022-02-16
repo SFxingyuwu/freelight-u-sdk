@@ -88,18 +88,15 @@ define build_target_log
 	mkdir -p $$LOG_DIR;\
 	cd $(1);\
 	$(2) $(MAKE) $(3) \
-	1>$$BUILD_LOG \
-	2>$$ERROR_LOG;\
+	2>&1 | tee $$BUILD_LOG;\
 	whiptail \
 	--title "Build Log" \
 	--yesno "Build result: $$? \n\
 	Buildlog: $$BUILD_LOG;\n\
-	Errorlog: $$ERROR_LOG;\n\
 	\nDo you want to check the logs?" \
-	20 60 && vim $$BUILD_LOG $$ERROR_LOG;\
+	20 60 && vim $$BUILD_LOG;\
 	echo ========================;\
 	echo Buildlog: $$BUILD_LOG;\
-	echo Errorlog: $$ERROR_LOG;\
 	echo ========================;\
 	cd -
 endef

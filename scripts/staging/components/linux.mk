@@ -2,6 +2,10 @@ LINUX_NAME=linux
 
 LINUX_REPO_DIR=$(CONFIG_LINUX_REPO_PATH)
 
+ifeq ($(CONFIG_LINUX_INSTALL_SUDO),y)
+_INSTALL_SUDO=sudo
+endif
+
 ifeq ($(CONFIG_LINUX_BUILD_IN_TMPFS),y)
 LINUX_BUILD_IN_TMPFS=/tempfs
 endif
@@ -25,7 +29,7 @@ _BOARD_LINUX_INSTALL_DIR=$(join $(LINUX_INSTALL_DIR), $(CONFIG_BOARD_SUBFIX))
 #$(3) des rootfs
 define linux_install_modules
 	pushd $(1); \
-	sudo $(2) $(MAKE) $(join INSTALL_MOD_PATH=, $(3)/) modules_install; \
+	$(_INSTALL_SUDO) $(2) $(MAKE) $(join INSTALL_MOD_PATH=, $(3)/) modules_install; \
 	popd; \
 	sync
 endef
@@ -35,7 +39,7 @@ endef
 #$(3) des rootfs
 define linux_install_zimage
 	pushd $(1); \
-	sudo $(2) $(MAKE) $(join INSTALL_PATH=, $(3)/boot) zinstall;  \
+	$(_INSTALL_SUDO) $(2) $(MAKE) $(join INSTALL_PATH=, $(3)/boot) zinstall;  \
 	popd; \
 	sync
 endef
@@ -46,7 +50,7 @@ endef
 #$(4) kernel version string
 define linux_install_dtbs
 	pushd $(1); \
-	sudo $(2) $(MAKE) $(join INSTALL_DTBS_PATH=, $(3)/boot/dtb$(4)) dtbs_install;\
+	$(_INSTALL_SUDO) $(2) $(MAKE) $(join INSTALL_DTBS_PATH=, $(3)/boot/dtb$(4)) dtbs_install;\
 	popd; \
 	sync
 endef
