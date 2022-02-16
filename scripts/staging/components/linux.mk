@@ -29,6 +29,7 @@ _BOARD_LINUX_INSTALL_DIR=$(join $(LINUX_INSTALL_DIR), $(CONFIG_BOARD_SUBFIX))
 #$(3) des rootfs
 define linux_install_modules
 	pushd $(1); \
+	$(_INSTALL_SUDO) mkdir -p $(3)/; \
 	$(_INSTALL_SUDO) $(2) $(MAKE) $(join INSTALL_MOD_PATH=, $(3)/) modules_install; \
 	popd; \
 	sync
@@ -39,6 +40,7 @@ endef
 #$(3) des rootfs
 define linux_install_zimage
 	pushd $(1); \
+	$(_INSTALL_SUDO) mkdir -p $(3)/boot; \
 	$(_INSTALL_SUDO) $(2) $(MAKE) $(join INSTALL_PATH=, $(3)/boot) zinstall;  \
 	popd; \
 	sync
@@ -50,6 +52,7 @@ endef
 #$(4) kernel version string
 define linux_install_dtbs
 	pushd $(1); \
+	$(_INSTALL_SUDO) mkdir -p $(3)/boot/dtb$(4); \
 	$(_INSTALL_SUDO) $(2) $(MAKE) $(join INSTALL_DTBS_PATH=, $(3)/boot/dtb$(4)) dtbs_install;\
 	popd; \
 	sync
