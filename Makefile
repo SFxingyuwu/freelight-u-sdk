@@ -3,10 +3,6 @@ sdkdir := $(sdkdir:/=)
 
 MAKEFILE_DIR=$(sdkdir)/scripts
 
-######### New SDK #########
-include $(MAKEFILE_DIR)/staging/Makefile
-######### New SDK #########
-
 # For SDK build ENV, it should be the first.
 include $(MAKEFILE_DIR)/sdk_env.mk
 
@@ -76,3 +72,7 @@ endif
 include $(MAKEFILE_DIR)/virtual_test.mk
 
 -include $(MAKEFILE_DIR)/debug.mk
+
+######### New SDK #########
+include $(MAKEFILE_DIR)/staging/Makefile
+######### New SDK #########
