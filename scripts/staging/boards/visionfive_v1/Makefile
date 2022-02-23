@@ -9,4 +9,4 @@ include $(MK_BOARDS_DIR)/$(BOARD_NAME)/linux.mk
 
 include $(MK_BOARDS_DIR)/$(BOARD_NAME)/fit.mk
 
-visionfive_v1_all: visionfive_v1_uboot_all visionfive_v1_linux_all visionfive_v1_fit
+visionfive_v1_all: nvdla-demo visionfive_v1_uboot_all visionfive_v1_linux_all visionfive_v1_fit
