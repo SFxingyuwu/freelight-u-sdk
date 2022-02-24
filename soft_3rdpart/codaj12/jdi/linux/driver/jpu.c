@@ -34,10 +34,13 @@
 #include <linux/sched.h>
 #include <linux/sched/signal.h>
 #include <linux/version.h>
-#include <soc/starfive/vic7100.h>
+#include <soc/sifive/sifive_l2_cache.h>
 
 #include "../../../jpuapi/jpuconfig.h"
 #include "jpu.h"
+
+#define starfive_flush_dcache(start, len) \
+	sifive_l2_flush64_range(start, len)
 
 //#define ENABLE_DEBUG_MSG
 #ifdef ENABLE_DEBUG_MSG
